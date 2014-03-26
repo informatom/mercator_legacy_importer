@@ -1,8 +1,11 @@
-class Legacy::PageTemplate < ActiveRecord::Base
-  establish_connection "import_development"
-  self.table_name = 'page_templates'
+module MercatorLegacyImporter
+  class PageTemplate < ActiveRecord::Base
 
-  # The following two lines fix the migration issues
-  hobo_model
-  fields
+    establish_connection "import_development"
+    self.table_name = 'page_templates'
+
+    # The following two lines fix the migration issues
+    hobo_model
+    fields
+  end
 end

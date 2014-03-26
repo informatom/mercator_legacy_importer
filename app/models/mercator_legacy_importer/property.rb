@@ -1,13 +1,16 @@
-class Legacy::Property < ActiveRecord::Base
-  establish_connection "import_development"
-  self.table_name = 'properties'
+module MercatorLegacyImporter
+  class Property < ActiveRecord::Base
 
-  # The following two lines fix the migration issues
-  hobo_model
-  fields
+    establish_connection "import_development"
+    self.table_name = 'properties'
 
-  has_many :property_translations
+    # The following two lines fix the migration issues
+    hobo_model
+    fields
 
-  has_many :product_properties
-  has_many :products, :through => :product_properties
+    has_many :property_translations
+
+    has_many :product_properties
+    has_many :products, :through => :product_properties
+  end
 end

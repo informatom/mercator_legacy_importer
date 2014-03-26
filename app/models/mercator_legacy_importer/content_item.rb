@@ -1,6 +1,9 @@
-class Legacy::ContentItem < ActiveRecord::Base
-  establish_connection "import_development"
-  self.table_name = 'content_items'
+module MercatorLegacyImporter
+  class ContentItem < ActiveRecord::Base
 
-  belongs_to :content
+    establish_connection "import_development"
+    self.table_name = 'content_items'
+
+    belongs_to :content
+  end
 end

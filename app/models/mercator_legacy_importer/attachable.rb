@@ -1,6 +1,9 @@
-class Legacy::Attachable < ActiveRecord::Base
-  establish_connection "import_development"
-  self.table_name = 'attachables'
+module MercatorLegacyImporter
+  class Attachable < ActiveRecord::Base
 
-  belongs_to :asset
+    establish_connection "import_development"
+    self.table_name = 'attachables'
+
+    belongs_to :asset
+  end
 end

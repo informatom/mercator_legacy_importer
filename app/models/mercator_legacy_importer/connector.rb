@@ -1,7 +1,10 @@
-class Legacy::Connector < ActiveRecord::Base
-  establish_connection "import_development"
-  self.table_name = 'connectors'
+module MercatorLegacyImporter
+  class Connector < ActiveRecord::Base
 
-  belongs_to :content
-  belongs_to :cms_node
+    establish_connection "import_development"
+    self.table_name = 'connectors'
+
+    belongs_to :content
+    belongs_to :cms_node
+  end
 end

@@ -1,8 +1,11 @@
-class Legacy::PropertyTranslation < ActiveRecord::Base
-  establish_connection "import_development"
-  self.table_name = 'property_translations'
+module MercatorLegacyImporter
+  class PropertyTranslation < ActiveRecord::Base
 
-  belongs_to :property
-  scope :german, -> { where(locale: "de") }
-  scope :english, -> { where(locale: "en") }
+    establish_connection "import_development"
+    self.table_name = 'property_translations'
+
+    belongs_to :property
+    scope :german, -> { where(locale: "de") }
+    scope :english, -> { where(locale: "en") }
+  end
 end
