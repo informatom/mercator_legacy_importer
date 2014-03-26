@@ -4,3 +4,24 @@ This is am sample engine for importing data from a legacy MYSQL database.
 Look into the models and the lib/tasks folder for examples for connecting to a database and importing data.
 
 This project uses the GPL V3 license. See file LICENSE in the same directory for details about the GPL V3.
+
+# Installation instructions
+
+1. Put in your Gemfile
+'''ruby
+gem "mercator_legacy_importer"
+'''
+2. Instell gem by running
+'''ruby
+bundle install
+'''
+3.2 Get all migrations into your app by running in your ipp directory
+'''ruby
+rake mercator_legacy_importer:install:migrations
+'''
+4. Run Migrations added
+'''ruby
+rake db:migrate
+'''
+5. Mount the Engine in your routes.rb
+mount MercatorLegacyImporter::Engine => "/mercator_legacy_importer"
