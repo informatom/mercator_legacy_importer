@@ -1,0 +1,6 @@
+= MercatorLegacyImporter
+
+This is am sample engine for importing data from a legacy MYSQL database.
+Look into the models and the lib/tasks folder for examples for connecting to a database and importing data.
+
+This project uses the GPL V3 license. See file LICENSE in the same directory for details about the GPL V3.
