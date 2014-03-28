@@ -5,7 +5,7 @@ def import_category_images
   assets = []
 
   Net::HTTP.start("www.iv-shop.at") do |http|
-    Legacy::Attachable.where(attachable_type: "Category").each do |legacy_attachable|
+    MercatorLegacyImporter::Attachable.where(attachable_type: "Category").each do |legacy_attachable|
 
       category = Category.where(legacy_id: legacy_attachable.attachable_id).first
 

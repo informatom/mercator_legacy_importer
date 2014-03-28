@@ -1,13 +1,32 @@
 def import_users
   puts "\nUsers:"
 
-  Legacy::User.all.each do |legacy_user|
+  MercatorLegacyImporter::User.all.each do |legacy_user|
     user = User.find_or_initialize_by_name(legacy_user.name)
     if user.update_attributes(email_address: legacy_user.email,
                               legacy_id: legacy_user.id)
       print "U"
     else
       puts "\nFAILURE: User: " + user.errors.first.to_s
+    end
+  end
+end
+
+namespace :users do
+  # starten als: 'bundle exec rake users:update_mesonic_data
+  # in Produktivumgebungen: 'bundle exec rake users:update_mesonic_data RAILS_ENV=production'
+  desc "Import from legacy webshop"
+  task :update_mesonic_data => :environment do
+    User.all.each do |user|
+      if user.legacy_id
+        @legacy_user = MercatorLegacyImporter::User.find(user.legacy_id)
+        if user.update(erp_contact_nr: @legacy_user.mesonic_account_mesoprim,
+                       erp_account_nr: @legacy_user.account_number_mesoprim)
+          print "U"
+        else
+          debugger
+        end
+      end
     end
   end
 end

@@ -1,7 +1,7 @@
 def import_recommendations
   puts "\n\nRecommendations:"
 
-  Legacy::Recommendation.all.each do |legacy_recommendation|
+  MercatorLegacyImporter::Recommendation.all.each do |legacy_recommendation|
     legacy_reason_de = legacy_recommendation.recommendation_translations.german.first
     legacy_reason_en = legacy_recommendation.recommendation_translations.english.first
 
@@ -10,7 +10,7 @@ def import_recommendations
       next if legacy_recommendation.for_product_id.blank?
       if recommendation = Product.find_by(number: legacy_recommendation.for_product_id)
 
-        if recommendation = Recommendation.create(product_id: product.id, 
+        if recommendation = Recommendation.create(product_id: product.id,
                                                   recommended_product_id: recommendation.id,
                                                   reason_de: legacy_reason_de.description,
                                                   reason_en: legacy_reason_en.description)
@@ -18,7 +18,7 @@ def import_recommendations
         else
           puts "\nFAILURE: Recommendation: " + recommendation.errors.first.to_s
         end
-      else 
+      else
         puts "\n FAIILURE: Recommended product not found: " + legacy_recommendation.for_product_id
       end
     else

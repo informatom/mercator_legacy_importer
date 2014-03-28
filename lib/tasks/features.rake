@@ -2,7 +2,7 @@ def import_features
   puts "\n\nFeatures:"
 
   n=1
-  Legacy::ProductOverviewProperty.all.each do |legacy_product_overview_property|
+  MercatorLegacyImporter::ProductOverviewProperty.all.each do |legacy_product_overview_property|
     legacy_product = Product.find_by_legacy_id(legacy_product_overview_property.product_id)
     unless legacy_product
       puts "\nFAILURE: Product not found: " + legacy_product_overview_property.product_id.to_s

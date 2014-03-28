@@ -5,7 +5,7 @@ def import_products
   end
   print "Products deleted."
 
-  Legacy::Product.all.each do |legacy_product|
+  MercatorLegacyImporter::Product.all.each do |legacy_product|
     legacy_product_de = legacy_product.product_translations.german.first
     legacy_product_en = legacy_product.product_translations.english.first
 

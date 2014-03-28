@@ -3,7 +3,7 @@ def import_product_images
   puts "\n\nProduct Images:"
 
   Net::HTTP.start("www.iv-shop.at") do |http|
-    Legacy::Product.all.each do |legacy_product|
+    MercatorLegacyImporter::Product.all.each do |legacy_product|
       if legacy_product.image_file_name || legacy_product.overview_file_name
         product = Product.find_by_legacy_id(legacy_product.id)
         filename = "/system/images/" + legacy_product.id.to_s +

@@ -6,8 +6,8 @@ def import_cms_node_images
   @legacy_attachables = []
 
   Net::HTTP.start("www.iv-shop.at") do |http|
-#    Legacy::CmsNode.where(name: "images").each do |legacy_cms_node|
-    Legacy::CmsNode.all.each do |legacy_cms_node|
+#    MercatorLegacyImporter::CmsNode.where(name: "images").each do |legacy_cms_node|
+    MercatorLegacyImporter::CmsNode.all.each do |legacy_cms_node|
 
       page = Page.where(legacy_id: legacy_cms_node.parent_id).first
 
@@ -29,7 +29,7 @@ def import_cms_node_images
         content_element.name_de = legacy_content.name if @locale == "de"
         content_element.name_en = legacy_content.name if @locale == "en"
 
-        legacy_attachable = Legacy::Attachable.where(attachable_type: "Content", attachable_id: legacy_content.id).first
+        legacy_attachable = MercatorLegacyImporter::Attachable.where(attachable_type: "Content", attachable_id: legacy_content.id).first
         unless legacy_attachable
           puts "\nFAILURE: Attachable not found " + legacy_content.id.to_s
           next
@@ -49,7 +49,7 @@ def import_cms_node_images
         data.original_filename = legacy_attachable.asset.data_file_name
         content_element.photo = data
 
-        Legacy::ContentItem.where(content_id: legacy_content.id).each do |legacy_content_item|
+        MercatorLegacyImporter::ContentItem.where(content_id: legacy_content.id).each do |legacy_content_item|
 
           debugger unless ["text", "slogan", "content"].include?(legacy_content_item.key)
 

@@ -3,7 +3,7 @@ def import_remaining_assets
   puts "\n\nCMS Assets:"
 
   Net::HTTP.start("www.iv-shop.at") do |http|
-    Legacy::Asset.where(data_content_type:  "application/pdf").each do |legacy_asset|
+    MercatorLegacyImporter::Asset.where(data_content_type:  "application/pdf").each do |legacy_asset|
 
       if ContentElement.find_by(name_de: legacy_asset.data_file_name, markup: "html")
         puts "\nFAILURE: Image exists " + legacy_asset.data_file_name

@@ -5,7 +5,7 @@ def import_categories
   end
   print "Categories deleted."
 
-  Legacy::Category.all.each do |legacy_category|
+  MercatorLegacyImporter::Category.all.each do |legacy_category|
     legacy_category_de = legacy_category.category_translations.german.first
     legacy_category_en = legacy_category.category_translations.english.first
 

@@ -9,7 +9,7 @@ def import_properties
 #  end
 #  print "Property Groups deleted."
 
-  Legacy::Product.all.each do |legacy_product|
+  MercatorLegacyImporter::Product.all.each do |legacy_product|
     product = Product.find_by_legacy_id(legacy_product.id)
     legacy_product.properties.each do |legacy_property|
       # next if legacy_property.id < 21050

@@ -3,9 +3,9 @@ def import_content_elements
 
   @legacy_contents = []
 
-#  Legacy::CmsNode.where(name: "main").each do |legacy_cms_node|
-#  Legacy::CmsNode.where(name: "overview").each do |legacy_cms_node|
-  Legacy::CmsNode.where(name: "slogan").each do |legacy_cms_node|
+#  MercatorLegacyImporter::CmsNode.where(name: "main").each do |legacy_cms_node|
+#  MercatorLegacyImporter::CmsNode.where(name: "overview").each do |legacy_cms_node|
+  MercatorLegacyImporter::CmsNode.where(name: "slogan").each do |legacy_cms_node|
 
     page = Page.where(legacy_id: legacy_cms_node.parent_id).first
 
@@ -27,7 +27,7 @@ def import_content_elements
       content_element.name_de = legacy_content.name if @locale == "de"
       content_element.name_en = legacy_content.name if @locale == "en"
 
-      Legacy::ContentItem.where(content_id: legacy_content.id).each do |legacy_content_item|
+      MercatorLegacyImporter::ContentItem.where(content_id: legacy_content.id).each do |legacy_content_item|
 
         debugger unless ["text", "slogan", "content"].include?(legacy_content_item.key)
 

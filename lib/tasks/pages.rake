@@ -1,7 +1,7 @@
 def import_pages
   puts "\n\nPages:"
 
-  Legacy::CmsNode.where(typus: "Page").each do |legacy_cms_node|
+  MercatorLegacyImporter::CmsNode.where(typus: "Page").each do |legacy_cms_node|
     legacy_cms_node_de = legacy_cms_node.cms_node_translations.german.first
     legacy_cms_node_en = legacy_cms_node.cms_node_translations.english.first
 

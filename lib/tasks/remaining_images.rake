@@ -3,11 +3,11 @@ def import_remaining_images
   puts "\n\nCMS Images:"
 
   Net::HTTP.start("www.iv-shop.at") do |http|
-    Legacy::Content.where(typus: "ImageContent").each do |legacy_content|
+    MercatorLegacyImporter::Content.where(typus: "ImageContent").each do |legacy_content|
 
       content_element = ContentElement.new(name_de: legacy_content.name, markup: "html")
 
-      legacy_attachable = Legacy::Attachable.where(attachable_type: "Content", attachable_id: legacy_content.id).first
+      legacy_attachable = MercatorLegacyImporter::Attachable.where(attachable_type: "Content", attachable_id: legacy_content.id).first
       unless legacy_attachable
         puts "\nFAILURE: Attachable not found " + legacy_content.id.to_s
         next

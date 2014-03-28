@@ -1,7 +1,7 @@
 def import_unlinked_content_items
   puts "\n\nUnlinked Content Elements:"
 
-  Legacy::ContentItem.where(typ: "text").each do |legacy_content_item|
+  MercatorLegacyImporter::ContentItem.where(typ: "text").each do |legacy_content_item|
 
   content_element = ContentElement.find_or_initialize_by(content_de: legacy_content_item.value)
 

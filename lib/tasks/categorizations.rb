@@ -1,6 +1,6 @@
 def import_categorizations
   puts "\n\nCategorizations:"
-  Legacy::Product.all.each do |legacy_product|
+  MercatorLegacyImporter::Product.all.each do |legacy_product|
 
     unless product = Product.find_by_legacy_id(legacy_product.id) then
       puts "\nFAILURE: Product " + legacy_product.id.to_s + " not found."
@@ -14,7 +14,7 @@ def import_categorizations
                                      "-00000-00000"
     end
 
-    unless legacy_category = Legacy::Category.find_by_category_product_group(legacy_product.article_group) then
+    unless legacy_category = MercatorLegacyImporter::Category.find_by_category_product_group(legacy_product.article_group) then
       puts "\nFAILURE: Legacy Category " + legacy_product.article_group.to_s + " not found."
       next
     end
