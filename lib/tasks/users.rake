@@ -20,14 +20,16 @@ namespace :users do
     ::JobLogger.info("=" * 50)
     ::JobLogger.info("Started Job: users:update_mesonic_data")
 
-    User.all.each do |user|
-      if user.legacy_id
-        @legacy_user = MercatorLegacyImporter::User.find(user.legacy_id)
-        if user.update(erp_contact_nr: @legacy_user.mesonic_account_mesoprim,
-                       erp_account_nr: @legacy_user.account_number_mesoprim)
-          ::JobLogger.error("User " + user.id + " (" + user.name + ") updated.")
-        else
-          ::JobLogger.error("User " + user.id + " (" + user.name + ") update failed.")
+    if MercatorMesonic::Webartikel.test_connection
+      User.all.each do |user|
+        if user.legacy_id
+          @legacy_user = MercatorLegacyImporter::User.find(user.legacy_id)
+          if user.update(erp_contact_nr: @legacy_user.mesonic_account_mesoprim,
+                         erp_account_nr: @legacy_user.account_number_mesoprim)
+            ::JobLogger.error("User " + user.id + " (" + user.name + ") updated.")
+          else
+            ::JobLogger.error("User " + user.id + " (" + user.name + ") update failed.")
+          end
         end
       end
     end
