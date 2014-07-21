@@ -49,7 +49,7 @@ namespace :legacy_import do
       if product.save
         print "P"
       else
-        product.number = legacy_product.article_number + " duplikat-" + legacy_product.id.to_s
+        product.number = legacy_product.id.to_s + " - Duplikat von " + legacy_product.article_number
         if product.save
           print "P"
         else
