@@ -49,7 +49,7 @@ namespace :legacy_import do
       if product.save
         print "P"
       else
-        puts "\nFAILURE: Product " + legacy_product.article_number ": " + product.errors.first.to_s
+        puts "\nFAILURE: Product " + legacy_product.article_number + ": " + product.errors.first.to_s
       end
     end
   end
