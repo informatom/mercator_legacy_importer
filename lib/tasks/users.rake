@@ -1,6 +1,8 @@
-namespace :import do
-  # starten als: 'bundle exec rake import:users
-  # in Produktivumgebungen: 'bundle exec rake import:users RAILS_ENV=production'
+# encoding: utf-8
+
+namespace :legacy_import do
+  # starten als: 'bundle exec rake legacy_import:users
+  # in Produktivumgebungen: 'bundle exec rake legacy_import:users RAILS_ENV=production'
   desc "Import users from legacy webshop"
   task :users => :environment do
 
@@ -17,8 +19,8 @@ namespace :import do
   end
 
 
-  # starten als: 'bundle exec rake users:update_mesonic_data
-  # in Produktivumgebungen: 'bundle exec rake users:update_mesonic_data RAILS_ENV=production'
+  # starten als: 'bundle exec rake legacy_import:update_mesonic_data
+  # in Produktivumgebungen: 'bundle exec rake legacy_import:update_mesonic_data RAILS_ENV=production'
   desc "Import from mesonic"
   task :update_mesonic_data => :environment do
     ::JobLogger.info("=" * 50)
