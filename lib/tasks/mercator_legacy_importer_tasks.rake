@@ -18,8 +18,6 @@ end
 #  import_pages()
 #  import_content_elements()
 
-#  import_category_images()
-
 #  import_cms_node_images()
 #  import_unlinked_content_items()
 #  import_remaining_images()
