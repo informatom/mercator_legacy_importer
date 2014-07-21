@@ -9,7 +9,6 @@ namespace :legacy_import do
   end
 end
 
-#  import_categorizations()
 #  import_product_images()
 
 #  import_recommendations()
