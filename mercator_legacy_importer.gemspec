@@ -17,4 +17,5 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", "~> 4.0.3"
   s.add_dependency 'mysql2'
+  a.add_dependency "require_all"
 end
