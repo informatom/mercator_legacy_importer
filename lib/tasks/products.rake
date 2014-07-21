@@ -44,12 +44,17 @@ namespace :legacy_import do
                                title_de: title_de,
                                title_en: title_en,
                                description_de: description_de.fix_utf8,
-                               description_en: description_en,
+                               description_en: description_en.fix_utf8,
                                legacy_id: legacy_product.id)
       if product.save
         print "P"
       else
-        puts "\nFAILURE: Product " + legacy_product.article_number + ": " + product.errors.first.to_s
+        product.number = legacy_product.article_number + " duplikat-" + legacy_product.id.to_s
+        if product.save
+          print "P"
+        else
+          puts "\nFAILURE: Product " + legacy_product.article_number + ": " + product.errors.first.to_s
+        end
       end
     end
   end
