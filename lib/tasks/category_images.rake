@@ -45,7 +45,7 @@ namespace :legacy_import do
           assets << legacy_attachable.asset
           legacy_attachable.delete()
         else
-          puts "\nFAILURE: Category: " + category.first.to_s
+          puts "\nFAILURE: Category: " + category.errors.first.to_s
         end
       end
     end
