@@ -16,9 +16,9 @@ namespace :legacy_import do
       legacy_product_en = legacy_product.product_translations.english.first
 
       if legacy_product_de && legacy_product_de.title.present?
-        name_de = legacy_product_de.title
+        title_de = legacy_product_de.title
       else
-        name_de = legacy_product.name
+        title_de = legacy_product.name
       end
 
       if legacy_product_de && legacy_product_de.long_description.present?
@@ -28,9 +28,9 @@ namespace :legacy_import do
       end
 
       if legacy_product_en && legacy_product_en.title.present?
-        name_en = legacy_product_en.title
+        title_en = legacy_product_en.title
       else
-        name_en = legacy_product.name
+        title_en = legacy_product.name
       end
 
       if legacy_product_en && legacy_product_en.long_description.present?
@@ -40,8 +40,8 @@ namespace :legacy_import do
       end
 
       product = Product.create(number: legacy_product.article_number,
-                               name_de: name_de,
-                               name_en: name_en,
+                               title_de: title_de,
+                               title_en: title_en,
                                description_de: description_de,
                                description_en: description_en,
                                legacy_id: legacy_product.id)
