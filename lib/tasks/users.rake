@@ -1,21 +1,25 @@
-def import_users
-  puts "\nUsers:"
+namespace :import do
+  # starten als: 'bundle exec rake import:users
+  # in Produktivumgebungen: 'bundle exec rake import:users RAILS_ENV=production'
+  desc "Import users from legacy webshop"
+  task :users => :environment do
 
-  MercatorLegacyImporter::User.all.each do |legacy_user|
-    user = User.find_or_initialize_by_name(legacy_user.name)
-    if user.update_attributes(email_address: legacy_user.email,
-                              legacy_id: legacy_user.id)
-      print "U"
-    else
-      puts "\nFAILURE: User: " + user.errors.first.to_s
+    puts "\nUsers:"
+    MercatorLegacyImporter::User.all.each do |legacy_user|
+      user = User.find_or_initialize_by_name(legacy_user.name)
+      if user.update_attributes(email_address: legacy_user.email,
+                                legacy_id: legacy_user.id)
+        print "U"
+      else
+        puts "\nFAILURE: User: " + user.errors.first.to_s
+      end
     end
   end
-end
 
-namespace :users do
+
   # starten als: 'bundle exec rake users:update_mesonic_data
   # in Produktivumgebungen: 'bundle exec rake users:update_mesonic_data RAILS_ENV=production'
-  desc "Import from legacy webshop"
+  desc "Import from mesonic"
   task :update_mesonic_data => :environment do
     ::JobLogger.info("=" * 50)
     ::JobLogger.info("Started Job: users:update_mesonic_data")
