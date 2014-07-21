@@ -18,7 +18,7 @@ namespace :legacy_import do
 
       category = Category.create(name_de: legacy_category_de.title && legacy_category.name)
       parent = Category.find_by_legacy_id(legacy_category.parent_id)
-      if category.update_attributes(name_en: legacy_category_en.title,
+      if category.update_attributes(name_en: legacy_category_en.title || "missing name",
                                    description_de: legacy_category_de.short_description,
                                    description_en: legacy_category_en.short_description,
                                    long_description_de: legacy_category_de.long_description,
