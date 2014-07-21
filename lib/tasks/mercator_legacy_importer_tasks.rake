@@ -9,7 +9,6 @@ namespace :legacy_import do
   end
 end
 
-#  import_features()
 #  import_categorizations()
 #  import_product_images()
 
@@ -24,4 +23,3 @@ end
 #  import_remaining_assets()
 
 ## ICECAT!!
-#  import_supply_relations()
