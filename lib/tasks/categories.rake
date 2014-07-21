@@ -6,7 +6,6 @@ namespace :legacy_import do
   desc "Import categories from legacy webshop"
   task :categories => :environment do
 
-
     puts "\n\nCategories:"
       Category.all.each do |category|
       category.delete
