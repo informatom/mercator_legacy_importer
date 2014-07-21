@@ -1,4 +1,5 @@
 # encoding: utf-8
+require 'string_extensions'
 
 namespace :legacy_import do
   # starten als: 'bundle exec rake legacy_import:products
@@ -42,13 +43,13 @@ namespace :legacy_import do
       product = Product.create(number: legacy_product.article_number,
                                title_de: title_de,
                                title_en: title_en,
-                               description_de: description_de,
+                               description_de: description_de.fix_utf8,
                                description_en: description_en,
                                legacy_id: legacy_product.id)
       if product.save
         print "P"
       else
-        puts "\nFAILURE: Product: " + product.errors.first.to_s
+        puts "\nFAILURE: Product " + legacy_product.article_number ": " + product.errors.first.to_s
       end
     end
   end
