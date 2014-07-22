@@ -51,8 +51,13 @@ namespace :legacy_import do
         content_element.content_de ||= "Inhalt fehlt (" + legacy_id.to_s + ")"
 
         unless content_element.save
-          puts "\nFAILURE: ContentElement: " + content_element.errors.first.to_s
-          next
+          # Trying to rescue duplicate names
+          content_element.name_de = content_element.name_de + " - Duplikat (" + legacy_id.to_s + ")"
+
+          unless content_element.save
+            puts "\nFAILURE: ContentElement: " + content_element.errors.first.to_s
+            next
+          end
         end
 
         print "C"
