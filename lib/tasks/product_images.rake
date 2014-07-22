@@ -29,6 +29,8 @@ namespace :legacy_import do
         data.class.class_eval { attr_accessor :original_filename }
         data.original_filename = legacy_product.image_file_name.presence || legacy_product.overview_file_name
         product.photo = data
+        product.photo_content_type = MIME::Types.type_for(original_filename).first.content_type
+
         if product.save
           print "P"
         else
