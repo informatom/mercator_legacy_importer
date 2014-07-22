@@ -12,13 +12,13 @@ namespace :legacy_import do
     Net::HTTP.start("www.iv-shop.at") do |http|
       MercatorLegacyImporter::Product.all.each do |legacy_product|
         unless legacy_product.image_file_name || legacy_product.overview_file_name
-          print "."
+          print "x"
           next
         end
 
         product = Product.find_by_legacy_id(legacy_product.id)
         if product.filename
-          print "x"
+          print "✔"
           next
         end
 
