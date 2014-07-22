@@ -41,7 +41,7 @@ namespace :legacy_import do
         end
 
         pcea = PageContentElementAssignment.find_or_initialize_by(used_as: @used_as,
-                                                                  page_id: webpage.id,
+                                                                  webpage_id: webpage.id,
                                                                   content_element_id: content_element.id)
         if pcea.save
           print "A"
