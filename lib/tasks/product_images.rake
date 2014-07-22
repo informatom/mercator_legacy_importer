@@ -32,6 +32,7 @@ namespace :legacy_import do
         if product.save
           print "P"
         else
+          debugger
           puts "\nFAILURE: Image: " + product.errors.first.to_s
         end
 
