@@ -7,7 +7,7 @@ namespace :legacy_import do
   task :categories => :environment do
 
     puts "\n\nCategories:"
-      Category.all.each do |category|
+    Category.all.each do |category|
       category.delete
     end
     print "Categories deleted."

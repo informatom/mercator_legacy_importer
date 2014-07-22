@@ -7,6 +7,11 @@ namespace :legacy_import do
   task :recommendations => :environment do
     puts "\n\nRecommendations:"
 
+    Recommendation.all.each do |recommendation|
+      recommendation.delete
+    end
+    print "Recommendations deleted."
+
     MercatorLegacyImporter::Recommendation.all.each do |legacy_recommendation|
       legacy_reason_de = legacy_recommendation.recommendation_translations.german.first
       legacy_reason_en = legacy_recommendation.recommendation_translations.english.first
