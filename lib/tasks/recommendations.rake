@@ -18,8 +18,8 @@ namespace :legacy_import do
 
           if recommendation = Recommendation.create(product_id: product.id,
                                                     recommended_product_id: recommendation.id,
-                                                    reason_de: legacy_reason_de.description,
-                                                    reason_en: legacy_reason_en.description)
+                                                    reason_de: legacy_reason_de.description.fix_utf8,
+                                                    reason_en: legacy_reason_en.description.fix_utf8)
             print "R"
           else
             puts "\nFAILURE: Recommendation: " + recommendation.errors.first.to_s
