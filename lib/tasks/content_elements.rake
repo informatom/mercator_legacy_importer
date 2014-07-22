@@ -32,24 +32,25 @@ namespace :legacy_import do
         MercatorLegacyImporter::ContentItem.where(content_id: legacy_content.id).each do |legacy_content_item|
           content_element.content_de = legacy_content_item.value if @locale == "de"
           content_element.content_en = legacy_content_item.value if @locale == "en"
-        legacy_content_item.delete()
+          legacy_content_item.delete()
         end
+        content_element.content_de ||= "Inhalt fehlt"
 
-        if content_element.save
-          print "C"
-        else
+        unless content_element.save
           puts "\nFAILURE: ContentElement: " + content_element.errors.first.to_s
+          next
         end
 
+        print "C"
         pcea = PageContentElementAssignment.find_or_initialize_by(used_as: @used_as,
                                                                   webpage_id: webpage.id,
                                                                   content_element_id: content_element.id)
-        if pcea.save
-          print "A"
-        else
+        unless pcea.save
           puts "\nFAILURE: PageContentElementAssignment: " + pcea.errors.first.to_s
+          next
         end
 
+        print "A"
         @legacy_contents << legacy_content
         legacy_connector.delete()
       end
