@@ -8,7 +8,7 @@ namespace :legacy_import do
     puts "\n\nContent Elements:"
     @legacy_contents = []
 
-    MercatorLegacyImporter::CmsNode.where(name: ["main", "overview", "slogan").each do |legacy_cms_node|
+    MercatorLegacyImporter::CmsNode.where(name: ["main", "overview", "slogan"]).each do |legacy_cms_node|
 
       page = Page.where(legacy_id: legacy_cms_node.parent_id).first
 
