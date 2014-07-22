@@ -6,6 +6,7 @@ namespace :legacy_import do
   desc "Import content_elements from legacy webshop"
   task :content_elements => :environment do
     puts "\n\nContent Elements:"
+
     @legacy_contents = []
 
     MercatorLegacyImporter::CmsNode.where(name: ["main", "overview", "slogan"]).each do |legacy_cms_node|
