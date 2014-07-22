@@ -39,12 +39,16 @@ namespace :legacy_import do
         content_element.name_de = legacy_content.name if @locale == "de"
         content_element.name_en = legacy_content.name if @locale == "en"
 
+        content_element.name_de ||= content_element.name_en
+        content_element.name_de ||= "Name fehlt (" + legacy_id + ")"
+
         MercatorLegacyImporter::ContentItem.where(content_id: legacy_content.id).each do |legacy_content_item|
           content_element.content_de = legacy_content_item.value if @locale == "de"
           content_element.content_en = legacy_content_item.value if @locale == "en"
           legacy_content_item.delete()
         end
-        content_element.content_de ||= "Inhalt fehlt"
+
+        content_element.content_de ||= "Inhalt fehlt (" + legacy_id + ")"
 
         unless content_element.save
           puts "\nFAILURE: ContentElement: " + content_element.errors.first.to_s
