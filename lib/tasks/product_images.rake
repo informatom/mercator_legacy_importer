@@ -17,7 +17,7 @@ namespace :legacy_import do
         end
 
         product = Product.find_by_legacy_id(legacy_product.id)
-        if product.filename
+        if product.photo_file_name.present?
           print "✔"
           next
         end
