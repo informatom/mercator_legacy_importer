@@ -7,6 +7,16 @@ namespace :legacy_import do
   task :content_elements => :environment do
     puts "\n\nContent Elements:"
 
+    ContentElement.all.each do |ce|
+      ce.delete
+    end
+    print "Content Elements deleted."
+
+    PageContentElementAssignment.all.each do |pcea|
+      pcea.delete
+    end
+    print "Page Content Element Assignments deleted."
+
     @legacy_contents = []
 
     MercatorLegacyImporter::CmsNode.where(name: ["main", "overview", "slogan"]).each do |legacy_cms_node|
@@ -52,13 +62,13 @@ namespace :legacy_import do
 
         print "A"
         @legacy_contents << legacy_content
-        legacy_connector.delete()
+#       legacy_connector.delete()
       end
-      legacy_cms_node.delete()
+#      legacy_cms_node.delete()
     end
 
     @legacy_contents.each do |legacy_content|
-      legacy_content.delete()
+#      legacy_content.delete()
     end
   end
 end
