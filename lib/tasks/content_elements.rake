@@ -48,7 +48,9 @@ namespace :legacy_import do
         #  legacy_content_item.delete()
         end
 
-        content_element.content_de ||= "Inhalt fehlt (" + legacy_id.to_s + ")"
+        unless content_element.content_de.present?
+          content_element.content_de = "Inhalt fehlt (" + legacy_id.to_s + ")"
+        end
 
         unless content_element.save
           # Trying to rescue duplicate names
@@ -56,6 +58,7 @@ namespace :legacy_import do
 
           unless content_element.save
             puts "\nFAILURE: ContentElement: " + content_element.errors.first.to_s
+            puts content_element.to_s
             next
           end
         end
