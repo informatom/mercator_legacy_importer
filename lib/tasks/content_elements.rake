@@ -10,7 +10,7 @@ namespace :legacy_import do
 
     MercatorLegacyImporter::CmsNode.where(name: ["main", "overview", "slogan"]).each do |legacy_cms_node|
 
-      page = Page.where(legacy_id: legacy_cms_node.parent_id).first
+      webpage = Webpage.where(legacy_id: legacy_cms_node.parent_id).first
 
       legacy_cms_node.connectors.each do |legacy_connector|
         if legacy_connector.position != 1
@@ -41,7 +41,7 @@ namespace :legacy_import do
         end
 
         pcea = PageContentElementAssignment.find_or_initialize_by(used_as: @used_as,
-                                                                  page_id: page.id,
+                                                                  page_id: webpage.id,
                                                                   content_element_id: content_element.id)
         if pcea.save
           print "A"
