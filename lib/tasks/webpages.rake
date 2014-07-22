@@ -1,10 +1,10 @@
 # encoding: utf-8
 
 namespace :legacy_import do
-  # starten als: 'bundle exec rake legacy_import:pages
-  # in Produktivumgebungen: 'bundle exec rake legacy_import:pages RAILS_ENV=production'
-  desc "Import pages from legacy webshop"
-  task :pages => :environment do
+  # starten als: 'bundle exec rake legacy_import:webpages
+  # in Produktivumgebungen: 'bundle exec rake legacy_import:webpages RAILS_ENV=production'
+  desc "Import webpages from legacy webshop"
+  task :webpages => :environment do
     puts "\n\nPages:"
 
     MercatorLegacyImporter::CmsNode.where(typus: "Page").each do |legacy_cms_node|
@@ -12,11 +12,11 @@ namespace :legacy_import do
       legacy_cms_node_en = legacy_cms_node.cms_node_translations.english.first
 
       page_template = PageTemplate.where(legacy_id: legacy_cms_node.page_template_id).first
-      parent = Page.where(legacy_id: legacy_cms_node.parent_id).first
+      parent = Webpage.where(legacy_id: legacy_cms_node.parent_id).first
 
       status = legacy_cms_node.state
       status = "published_but_hidden" if legacy_cms_node.hide_from_menu? && legacy_cms_node.state == "published"
-      page = Page.new(title_de: ( legacy_cms_node_de.title.present? ? legacy_cms_node_de.title : legacy_cms_node.name ),
+      page = Webpage.new(title_de: ( legacy_cms_node_de.title.present? ? legacy_cms_node_de.title : legacy_cms_node.name ),
                       title_en: legacy_cms_node_en.title,
                       url: legacy_cms_node.url,
                       position: legacy_cms_node.position,
@@ -27,7 +27,7 @@ namespace :legacy_import do
       if page.save
         print "P"
       else
-        puts "\nFAILURE: Page: " + page.errors.first.to_s
+        puts "\nFAILURE: Webpage: " + page.errors.first.to_s
       end
     end
   end
