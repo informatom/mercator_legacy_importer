@@ -15,11 +15,17 @@ namespace :legacy_import do
       if product = Product.find_by(legacy_id: legacy_recommendation.from_product_id)
         next if legacy_recommendation.for_product_id.blank?
         if recommendation = Product.find_by(number: legacy_recommendation.for_product_id)
+          reason_de = legacy_reason_de.description.fix_utf8
+          reason_en = legacy_reason_en.description.fix_utf8
+
+          if reason_de.include? 'schnellerer Druck'
+            debugger
+          ènd
 
           if recommendation = Recommendation.create(product_id: product.id,
                                                     recommended_product_id: recommendation.id,
-                                                    reason_de: legacy_reason_de.description.fix_utf8,
-                                                    reason_en: legacy_reason_en.description.fix_utf8)
+                                                    reason_de: reason_de,
+                                                    reason_en: reason_en)
             print "R"
           else
             puts "\nFAILURE: Recommendation: " + recommendation.errors.first.to_s

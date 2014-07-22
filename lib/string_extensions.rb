@@ -14,7 +14,8 @@ class String
     string = string.gsub(/\xE2\x89\xA4/, '-')
     string = string.gsub(/\xEF\xBF\xBD/, 'ä')
 
-    # string = string.gsub(//, '-')
+    # string = string.gsub(//, '-'
+        )
     return string
   end
 end
