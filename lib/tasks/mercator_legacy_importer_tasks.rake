@@ -9,6 +9,9 @@ namespace :legacy_import do
   end
 end
 
+
+
+FAILURE: Image: [:photo, "has an extension that does not match its contents"]
 #  import_product_images()
 
 #  import_recommendations()
