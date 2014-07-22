@@ -9,10 +9,6 @@ namespace :legacy_import do
   end
 end
 
-
-#  import_recommendations()
-
-#  import_page_templates()
 #  import_pages()
 #  import_content_elements()
 #  import_cms_node_images()
