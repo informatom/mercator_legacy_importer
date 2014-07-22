@@ -10,12 +10,12 @@ namespace :legacy_import do
     ContentElement.all.each do |ce|
       ce.delete
     end
-    print "Content Elements deleted."
+    puts "Content Elements deleted."
 
     PageContentElementAssignment.all.each do |pcea|
       pcea.delete
     end
-    print "Page Content Element Assignments deleted."
+    puts "Page Content Element Assignments deleted."
 
     @legacy_contents = []
 
@@ -40,7 +40,7 @@ namespace :legacy_import do
         content_element.name_en = legacy_content.name if @locale == "en"
 
         content_element.name_de ||= content_element.name_en
-        content_element.name_de ||= "Name fehlt (" + legacy_id + ")"
+        content_element.name_de ||= "Name fehlt (" + legacy_id.to_s + ")"
 
         MercatorLegacyImporter::ContentItem.where(content_id: legacy_content.id).each do |legacy_content_item|
           content_element.content_de = legacy_content_item.value if @locale == "de"
@@ -48,7 +48,7 @@ namespace :legacy_import do
           legacy_content_item.delete()
         end
 
-        content_element.content_de ||= "Inhalt fehlt (" + legacy_id + ")"
+        content_element.content_de ||= "Inhalt fehlt (" + legacy_id.to_s + ")"
 
         unless content_element.save
           puts "\nFAILURE: ContentElement: " + content_element.errors.first.to_s
