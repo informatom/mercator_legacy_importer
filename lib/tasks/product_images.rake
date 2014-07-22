@@ -35,6 +35,7 @@ namespace :legacy_import do
           print "P"
         else
           puts "\nFAILURE: Image: " + product.errors.first.to_s
+          # If image is missing on server, we get probable a content type mismatch error, e.g. html (error page) instead of png (image)
         end
       end
     end

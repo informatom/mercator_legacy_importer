@@ -10,8 +10,6 @@ namespace :legacy_import do
 end
 
 
-#  import_product_images()
-
 #  import_recommendations()
 
 #  import_page_templates()
