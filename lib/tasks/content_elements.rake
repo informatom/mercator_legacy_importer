@@ -45,7 +45,7 @@ namespace :legacy_import do
         MercatorLegacyImporter::ContentItem.where(content_id: legacy_content.id).each do |legacy_content_item|
           content_element.content_de = legacy_content_item.value if @locale == "de"
           content_element.content_en = legacy_content_item.value if @locale == "en"
-        #  legacy_content_item.delete()
+          legacy_content_item.delete()
         end
 
         unless content_element.content_de.present?
@@ -74,13 +74,13 @@ namespace :legacy_import do
 
         print "A"
         @legacy_contents << legacy_content
-       # legacy_connector.delete()
+        legacy_connector.delete()
       end
-      # legacy_cms_node.delete()
+      legacy_cms_node.delete()
     end
 
     @legacy_contents.each do |legacy_content|
-      # legacy_content.delete()
+      legacy_content.delete()
     end
   end
 end
