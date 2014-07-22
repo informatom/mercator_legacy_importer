@@ -7,15 +7,15 @@ namespace :legacy_import do
   task :content_elements => :environment do
     puts "\n\nContent Elements:"
 
-    ContentElement.all.each do |ce|
-      ce.delete
-    end
-    puts "Content Elements deleted."
+    # ContentElement.all.each do |ce|
+    #   ce.delete
+    # end
+    # puts "Content Elements deleted."
 
-    PageContentElementAssignment.all.each do |pcea|
-      pcea.delete
-    end
-    puts "Page Content Element Assignments deleted."
+    # PageContentElementAssignment.all.each do |pcea|
+    #   pcea.delete
+    # end
+    # puts "Page Content Element Assignments deleted."
 
     @legacy_contents = []
 
