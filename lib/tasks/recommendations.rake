@@ -20,7 +20,7 @@ namespace :legacy_import do
 
           if reason_de.include? 'schnellerer Druck'
             debugger
-          ènd
+          end
 
           if recommendation = Recommendation.create(product_id: product.id,
                                                     recommended_product_id: recommendation.id,
