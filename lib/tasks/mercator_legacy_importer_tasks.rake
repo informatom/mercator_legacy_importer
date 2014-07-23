@@ -9,7 +9,6 @@ namespace :legacy_import do
   end
 end
 
-#  import_remaining_images()
 #  import_remaining_assets()
 
 # noch unkonvertierte scripts?
