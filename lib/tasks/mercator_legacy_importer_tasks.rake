@@ -9,7 +9,6 @@ namespace :legacy_import do
   end
 end
 
-#  import_cms_node_images()
 #  import_unlinked_content_items()
 #  import_remaining_images()
 #  import_remaining_assets()

@@ -1,26 +1,32 @@
-def import_unlinked_content_items
-  puts "\n\nUnlinked Content Elements:"
+# encoding: utf-8
 
-  MercatorLegacyImporter::ContentItem.where(typ: "text").each do |legacy_content_item|
+namespace :legacy_import do
+  # starten als: 'bundle exec rake legacy_import:unlinked_content_items
+  # in Produktivumgebungen: 'bundle exec rake legacy_import:unlinked_content_items RAILS_ENV=production'
+  desc "Import unlinked_content_items from legacy webshop"
+  task :unlinked_content_items => :environment do
 
-  content_element = ContentElement.find_or_initialize_by(content_de: legacy_content_item.value)
+    puts "\n\nUnlinked Content Items:"
 
-  if legacy_content_item.content
-    name = legacy_content_item.content.name
-  else
-    name =  "unbekannt"
-  end
-  content_element.name_de = name
+    MercatorLegacyImporter::ContentItem.where(typ: "text").each do |legacy_content_item|
 
-  content_element.markup = "html"
+      content_element = ContentElement.find_or_initialize_by(content_de: legacy_content_item.value)
 
-  if content_element.save
-    print "C"
-    legacy_content_item.content.delete() if legacy_content_item.content
-    legacy_content_item.delete()
-  else
-    puts "\nFAILURE: ContentElement: " + content_element.errors.first.to_s
-  end
+      if legacy_content_item.content
+        name = legacy_content_item.content.name
+      else
+        name =  "unbekannt"
+      end
+      content_element.name_de = name
+      content_element.markup = "html"
 
+      if content_element.save
+        print "C"
+        legacy_content_item.content.delete() if legacy_content_item.content
+        legacy_content_item.delete()
+      else
+        puts "\nFAILURE: ContentElement: " + content_element.errors.first.to_s
+      end
+    end
   end
 end
