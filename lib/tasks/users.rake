@@ -32,9 +32,9 @@ namespace :legacy_import do
           @legacy_user = MercatorLegacyImporter::User.find(user.legacy_id)
           if user.update(erp_contact_nr: @legacy_user.mesonic_account_mesoprim,
                          erp_account_nr: @legacy_user.account_number_mesoprim)
-            ::JobLogger.error("User " + user.id + " (" + user.name + ") updated.")
+            ::JobLogger.error("User " + user.id.to_s + " (" + user.name + ") updated.")
           else
-            ::JobLogger.error("User " + user.id + " (" + user.name + ") update failed.")
+            ::JobLogger.error("User " + user.id.to_s + " (" + user.name + ") update failed.")
           end
         end
       end
