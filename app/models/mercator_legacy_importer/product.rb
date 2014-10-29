@@ -11,5 +11,12 @@ module MercatorLegacyImporter
     has_many :product_translations
     has_many :product_properties
     has_many :properties , :through => :product_properties
+
+
+    #--- Class Methods --- #
+
+    def self.non_unique
+      select("article_number, count(article_number) as quantity").group(:article_number).having("quantity > 1").to_a
+    end
   end
 end
