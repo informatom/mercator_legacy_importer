@@ -1,7 +1,7 @@
 module MercatorLegacyImporter
   class CmsNodeTranslation < ActiveRecord::Base
 
-    establish_connection "import_development"
+    establish_connection "legacy_import"
     self.table_name = 'cms_node_translations'
 
     belongs_to :cms_node

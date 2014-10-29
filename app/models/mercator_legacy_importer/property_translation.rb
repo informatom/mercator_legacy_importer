@@ -1,7 +1,7 @@
 module MercatorLegacyImporter
   class PropertyTranslation < ActiveRecord::Base
 
-    establish_connection "import_development"
+    establish_connection "legacy_import"
     self.table_name = 'property_translations'
 
     belongs_to :property

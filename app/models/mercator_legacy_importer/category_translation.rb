@@ -1,7 +1,7 @@
 module MercatorLegacyImporter
   class CategoryTranslation < ActiveRecord::Base
 
-    establish_connection "import_development"
+    establish_connection "legacy_import"
     self.table_name = 'category_translations'
 
     belongs_to :category

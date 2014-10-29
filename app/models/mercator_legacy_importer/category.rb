@@ -1,7 +1,7 @@
 module MercatorLegacyImporter
 
   class Category < ActiveRecord::Base
-    establish_connection "import_development"
+    establish_connection "legacy_import"
     self.table_name = 'categories'
 
     # The following two lines fix the migration issues

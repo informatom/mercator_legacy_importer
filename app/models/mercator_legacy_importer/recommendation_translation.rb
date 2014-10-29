@@ -1,7 +1,7 @@
 module MercatorLegacyImporter
   class RecommendationTranslation < ActiveRecord::Base
 
-    establish_connection "import_development"
+    establish_connection "legacy_import"
     self.table_name = 'recommendation_translations'
 
     belongs_to :recommendation
