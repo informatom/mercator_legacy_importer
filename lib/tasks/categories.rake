@@ -95,5 +95,8 @@ namespace :legacy_import do
     end
 
     MercatorMesonic::Webartikel.update_categorizations()
+    Category.deprecate()
+    Category.deprecated.delete_all
+    Category.reindexing_and_filter_updates()
   end
 end
