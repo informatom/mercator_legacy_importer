@@ -40,4 +40,60 @@ namespace :legacy_import do
       end
     end
   end
+
+  # starten als: 'bundle exec rake legacy_import:only_active_categories RAILS_ENV=production'
+  desc "Import only active categories from legacy webshop"
+  task :only_active_categories => :environment do
+    puts "Categories:"
+    Category.all.each do |category|
+      category.delete
+    end
+    puts "Categories deleted."
+
+    Category.mercator()
+    Category.auto()
+
+    Category.discounts()
+    Category.novelties()
+    Category.topseller()
+    Category.orphans()
+    puts "Created default categories"
+
+    MercatorLegacyImporter::Category.all.each do |legacy_category|
+      next unless legacy_category.active
+      legacy_category_de = legacy_category.category_translations.german.first
+      legacy_category_en = legacy_category.category_translations.english.first
+
+      category = Category.create(name_de: legacy_category_de.title && legacy_category.name)
+
+      name_en = legacy_category_en.title.present? ? legacy_category_en.title : "missing_name"
+      category.update_attributes(name_en: name_en,
+                                 description_de: legacy_category_de.short_description,
+                                 description_en: legacy_category_en.short_description,
+                                 long_description_de: legacy_category_de.long_description,
+                                 long_description_en:  legacy_category_en.long_description,
+                                 position:  legacy_category.position,
+                                 legacy_id: legacy_category.id,
+                                 erp_identifier: legacy_category.category_product_group,
+                                 filtermin: 1,
+                                 filtermax: 1,
+                                 parent_id: nil) or
+      (( puts "\nFAILURE: Category " + category.errors.first.to_s ))
+
+      category.state = "active" if legacy_category.active == true
+      category.save or
+      (( puts "\nFAILURE: Category " + category.errors.first.to_s ))
+    end
+
+    Category.all.each do |category|
+      next unless category.legacy_id
+      legacy_parent_id = MercatorLegacyImporter::Category.find(category.legacy_id).parent_id
+      if legacy_parent_id.present? && parent = Category.find_by(legacy_id: legacy_parent_id)
+        category.update(parent_id: parent.id) or
+        (( puts "\nFAILURE: Category parent is missing: " + category.errors.first.to_s ))
+      end
+    end
+
+    MercatorMesonic::Webartikel.update_categorizations()
+  end
 end
