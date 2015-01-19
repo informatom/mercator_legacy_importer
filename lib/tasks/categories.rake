@@ -41,9 +41,9 @@ namespace :legacy_import do
     end
   end
 
-  # starten als: 'bundle exec rake legacy_import:only_active_categories RAILS_ENV=production'
+  # starten als: 'bundle exec rake legacy_import:only_active_categories_part1 RAILS_ENV=production'
   desc "Import only active categories from legacy webshop"
-  task :only_active_categories => :environment do
+  task :only_active_categories_part1 => :environment do
     puts "Categories:"
     Category.all.each do |category|
       category.delete
@@ -67,7 +67,9 @@ namespace :legacy_import do
       category = Category.create(name_de: legacy_category_de.title && legacy_category.name)
 
       name_en = legacy_category_en.title.present? ? legacy_category_en.title : "missing_name"
-      category.update_attributes(name_en: name_en,
+      category.update_attributes(usage: :standard,
+                                 squeel_condition: legacy_category.category_conditions,
+                                 name_en: name_en,
                                  description_de: legacy_category_de.short_description,
                                  description_en: legacy_category_en.short_description,
                                  long_description_de: legacy_category_de.long_description,
@@ -93,10 +95,30 @@ namespace :legacy_import do
         (( puts "\nFAILURE: Category parent is missing: " + category.errors.first.to_s ))
       end
     end
+  end
 
+  # starten als: 'bundle exec rake legacy_import:only_active_categories_part2 RAILS_ENV=production'
+  desc "Import only active categories from legacy webshop"
+  task :only_active_categories_part2 => :environment do
     MercatorMesonic::Webartikel.update_categorizations()
     Category.deprecate()
     Category.deprecated.delete_all
     Category.reindexing_and_filter_updates()
+  end
+
+  # starten als: 'bundle exec rake legacy_import:fix_squeel RAILS_ENV=production'
+  desc "SQL-SQUEEL Translations"
+  task :fix_squeel => :environment do
+    category = Category.find_by(squeel_condition: "( WEBARTIKEL.PreisdatumVON <= NOW() ) AND ( WEBARTIKEL.PreisdatumBIS >= NOW() )")
+    category.update(squeel_condition: "(preisdatumVON <= Time.now) & (preisdatumBIS >= Time.now)")
+
+    category = Category.find_by(squeel_condition: "( WEBARTIKEL.Kennzeichen = 'X' )")
+    category.update(squeel_condition: "kennzeichen == 'X'")
+
+    category = Category.find_by(squeel_condition: "( WEBARTIKEL.Artikeluntergruppe <= '00060-00090-00090-00000-00000' ) AND ( WEBARTIKEL.Artikeluntergruppe >= '00060-00090-00000-00000-00000' )")
+    category.update(squeel_condition: "(artikeluntergruppe <= '00060-00090-00090-00000-00000') & (artikeluntergruppe >= '00060-00090-00000-00000-00000')")
+
+    category = Category.find_by(squeel_condition: "( WEBARTIKEL.Artikeluntergruppe <= '00045-00020-00013-00000-00000' ) AND ( WEBARTIKEL.Artikeluntergruppe >= '00045-00020-00010-00000-00000' )")
+    category.update(squeel_condition: "(artikeluntergruppe <= '00045-00020-00013-00000-00000') & (artikeluntergruppe >= '00045-00020-00010-00000-00000')")
   end
 end
