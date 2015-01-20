@@ -102,7 +102,6 @@ namespace :legacy_import do
   task :only_active_categories_part2 => :environment do
     MercatorMesonic::Webartikel.update_categorizations()
     Category.deprecate()
-    Category.deprecated.delete_all
     Category.reindexing_and_filter_updates()
   end
 
