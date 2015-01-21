@@ -106,24 +106,24 @@ namespace :legacy_import do
   desc "SQL-SQUEEL Translations"
   task :fix_squeel => :environment do
     category = Category.find_by(squeel_condition: "( WEBARTIKEL.PreisdatumVON <= NOW() ) AND ( WEBARTIKEL.PreisdatumBIS >= NOW() )")
-    category.update(squeel_condition: "(preisdatumVON <= Time.now) & (preisdatumBIS >= Time.now)")
+    category.update(squeel_condition: "(preisdatumVON <= Time.now) & (preisdatumBIS >= Time.now)") if category
 
     category = Category.find_by(squeel_condition: "( WEBARTIKEL.Kennzeichen = 'X' )")
-    category.update(squeel_condition: "kennzeichen == 'X'")
+    category.update(squeel_condition: "kennzeichen == 'X'") if category
 
     category = Category.find_by(squeel_condition: "( WEBARTIKEL.Kennzeichen = 'S' )")
-    category.update(squeel_condition: "kennzeichen == 'S'")
+    category.update(squeel_condition: "kennzeichen == 'S'") if category
 
     category = Category.find_by(squeel_condition: "( WEBARTIKEL.Kennzeichen = 'H' )")
-    category.update(squeel_condition: "kennzeichen == 'H'")
+    category.update(squeel_condition: "kennzeichen == 'H'") if category
 
     category = Category.find_by(squeel_condition: "( WEBARTIKEL.Kennzeichen = 'E' )")
-    category.update(squeel_condition: "kennzeichen == 'E'")
+    category.update(squeel_condition: "kennzeichen == 'E'") if category
 
     category = Category.find_by(squeel_condition: "( WEBARTIKEL.Artikeluntergruppe <= '00060-00090-00090-00000-00000' ) AND ( WEBARTIKEL.Artikeluntergruppe >= '00060-00090-00000-00000-00000' )")
-    category.update(squeel_condition: "(artikeluntergruppe <= '00060-00090-00090-00000-00000') & (artikeluntergruppe >= '00060-00090-00000-00000-00000')")
+    category.update(squeel_condition: "(artikeluntergruppe <= '00060-00090-00090-00000-00000') & (artikeluntergruppe >= '00060-00090-00000-00000-00000')") if category
 
     category = Category.find_by(squeel_condition: "( WEBARTIKEL.Artikeluntergruppe <= '00045-00020-00013-00000-00000' ) AND ( WEBARTIKEL.Artikeluntergruppe >= '00045-00020-00010-00000-00000' )")
-    category.update(squeel_condition: "(artikeluntergruppe <= '00045-00020-00013-00000-00000') & (artikeluntergruppe >= '00045-00020-00010-00000-00000')")
+    category.update(squeel_condition: "(artikeluntergruppe <= '00045-00020-00013-00000-00000') & (artikeluntergruppe >= '00045-00020-00010-00000-00000')") if category
   end
 end
