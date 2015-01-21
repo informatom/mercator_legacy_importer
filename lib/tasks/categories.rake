@@ -52,8 +52,6 @@ namespace :legacy_import do
 
     Category.mercator()
     Category.auto()
-
-    Category.discounts()
     Category.novelties()
     Category.topseller()
     Category.orphans()
@@ -112,6 +110,15 @@ namespace :legacy_import do
 
     category = Category.find_by(squeel_condition: "( WEBARTIKEL.Kennzeichen = 'X' )")
     category.update(squeel_condition: "kennzeichen == 'X'")
+
+    category = Category.find_by(squeel_condition: "( WEBARTIKEL.Kennzeichen = 'S' )")
+    category.update(squeel_condition: "kennzeichen == 'S'")
+
+    category = Category.find_by(squeel_condition: "( WEBARTIKEL.Kennzeichen = 'H' )")
+    category.update(squeel_condition: "kennzeichen == 'H'")
+
+    category = Category.find_by(squeel_condition: "( WEBARTIKEL.Kennzeichen = 'E' )")
+    category.update(squeel_condition: "kennzeichen == 'E'")
 
     category = Category.find_by(squeel_condition: "( WEBARTIKEL.Artikeluntergruppe <= '00060-00090-00090-00000-00000' ) AND ( WEBARTIKEL.Artikeluntergruppe >= '00060-00090-00000-00000-00000' )")
     category.update(squeel_condition: "(artikeluntergruppe <= '00060-00090-00090-00000-00000') & (artikeluntergruppe >= '00060-00090-00000-00000-00000')")
