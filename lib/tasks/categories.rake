@@ -60,7 +60,6 @@ namespace :legacy_import do
     puts "Created default categories"
 
     MercatorLegacyImporter::Category.all.each do |legacy_category|
-      next unless legacy_category.active
       legacy_category_de = legacy_category.category_translations.german.first
       legacy_category_en = legacy_category.category_translations.english.first
 
