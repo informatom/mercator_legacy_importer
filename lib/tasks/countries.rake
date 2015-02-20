@@ -1,8 +1,7 @@
 # encoding: utf-8
 
 namespace :legacy_import do
-  # starten als: 'bundle exec rake legacy_import:countries
-  # in Produktivumgebungen: 'bundle exec rake legacy_import:countries RAILS_ENV=production'
+  # starten als: 'bundle exec rake legacy_import:countries RAILS_ENV=production'
   desc "Import countries from legacy webshop"
   task :countries => :environment do
 

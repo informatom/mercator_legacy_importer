@@ -1,8 +1,7 @@
 # encoding: utf-8
 
 namespace :legacy_import do
-  # starten als: 'bundle exec rake legacy_import:page_templates
-  # in Produktivumgebungen: 'bundle exec rake legacy_import:page_templates RAILS_ENV=production'
+  # starten als: 'bundle exec rake legacy_import:page_templates RAILS_ENV=production'
   desc "Import page_templates from legacy webshop"
   task :page_templates => :environment do
     puts "\n\nPage Templates:"

@@ -1,8 +1,7 @@
 # encoding: utf-8
 
 namespace :legacy_import do
-  # starten als: 'bundle exec rake legacy_import:content_elements
-  # in Produktivumgebungen: 'bundle exec rake legacy_import:content_elements RAILS_ENV=production'
+  # starten als: 'bundle exec rake legacy_import:content_elements RAILS_ENV=production'
   desc "Import content_elements from legacy webshop"
   task :content_elements => :environment do
     puts "\n\nContent Elements:"

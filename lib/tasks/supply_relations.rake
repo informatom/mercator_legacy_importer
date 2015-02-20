@@ -3,8 +3,7 @@
 # Probably not to be used because of Icecat import !
 
 namespace :legacy_import do
-  # starten als: 'bundle exec rake legacy_import:supply_relations
-  # in Produktivumgebungen: 'bundle exec rake legacy_import:supply_relations RAILS_ENV=production'
+  # starten als: 'bundle exec rake legacy_import:supply_relations RAILS_ENV=production'
   desc "Import supply_relations from legacy webshop"
   task :supply_relations => :environment do
 

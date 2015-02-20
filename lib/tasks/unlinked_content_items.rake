@@ -1,8 +1,7 @@
 # encoding: utf-8
 
 namespace :legacy_import do
-  # starten als: 'bundle exec rake legacy_import:unlinked_content_items
-  # in Produktivumgebungen: 'bundle exec rake legacy_import:unlinked_content_items RAILS_ENV=production'
+  # starten als: 'bundle exec rake legacy_import:unlinked_content_items RAILS_ENV=production'
   desc "Import unlinked_content_items from legacy webshop"
   task :unlinked_content_items => :environment do
 

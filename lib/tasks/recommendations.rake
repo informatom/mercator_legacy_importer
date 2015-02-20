@@ -1,8 +1,7 @@
 # encoding: utf-8
 
 namespace :legacy_import do
-  # starten als: 'bundle exec rake legacy_import:recommendations
-  # in Produktivumgebungen: 'bundle exec rake legacy_import:recommendations RAILS_ENV=production'
+  # starten als: 'bundle exec rake legacy_import:recommendations RAILS_ENV=production'
   desc "Import recommendations from legacy webshop"
   task :recommendations => :environment do
     puts "\n\nRecommendations:"

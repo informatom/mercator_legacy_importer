@@ -1,8 +1,7 @@
 # encoding: utf-8
 
 namespace :legacy_import do
-  # starten als: 'bundle exec rake legacy_import:webpages
-  # in Produktivumgebungen: 'bundle exec rake legacy_import:webpages RAILS_ENV=production'
+  # starten als: 'bundle exec rake legacy_import:webpages RAILS_ENV=production'
   desc "Import webpages from legacy webshop"
   task :webpages => :environment do
     puts "\n\nWebpages:"

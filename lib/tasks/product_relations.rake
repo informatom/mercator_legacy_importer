@@ -1,8 +1,7 @@
 # encoding: utf-8
 
 namespace :legacy_import do
-  # starten als: 'bundle exec rake legacy_import:product_relations
-  # in Produktivumgebungen: 'bundle exec rake legacy_import:product_relations RAILS_ENV=production'
+  # starten als: 'bundle exec rake legacy_import:product_relations RAILS_ENV=production'
   desc "Import product relations from legacy webshop"
   task :product_relations => :environment do
 

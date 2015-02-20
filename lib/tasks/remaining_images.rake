@@ -1,8 +1,7 @@
 # encoding: utf-8
 
 namespace :legacy_import do
-  # starten als: 'bundle exec rake legacy_import:remaining_images
-  # in Produktivumgebungen: 'bundle exec rake legacy_import:remaining_images RAILS_ENV=production'
+  # starten als: 'bundle exec rake legacy_import:remaining_images RAILS_ENV=production'
   desc "Import remaining_images from legacy webshop"
   task :remaining_images => :environment do
 

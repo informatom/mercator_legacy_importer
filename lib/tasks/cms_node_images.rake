@@ -1,8 +1,7 @@
 # encoding: utf-8
 
 namespace :legacy_import do
-  # starten als: 'bundle exec rake legacy_import:cms_node_images
-  # in Produktivumgebungen: 'bundle exec rake legacy_import:cms_node_images RAILS_ENV=production'
+  # starten als: 'bundle exec rake legacy_import:cms_node_images RAILS_ENV=production'
   desc "Import cms node images from legacy webshop"
   task :cms_node_images => :environment do
 

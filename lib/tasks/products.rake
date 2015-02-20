@@ -2,8 +2,7 @@
 require 'string_extensions'
 
 namespace :legacy_import do
-  # starten als: 'bundle exec rake legacy_import:products
-  # in Produktivumgebungen: 'bundle exec rake legacy_import:products RAILS_ENV=production'
+  # starten als: 'bundle exec rake legacy_import:products RAILS_ENV=production'
   desc "Import products from legacy webshop"
   task :products => :environment do
     puts "\n\nProducts:"
