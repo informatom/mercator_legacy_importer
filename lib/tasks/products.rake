@@ -1,6 +1,4 @@
 # encoding: utf-8
-require 'string_extensions'
-
 namespace :legacy_import do
   # starten als: 'bundle exec rake legacy_import:products RAILS_ENV=production'
   desc "Import products from legacy webshop"
